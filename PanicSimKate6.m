@@ -3,6 +3,8 @@ close all
 tic;
 %  rng(100) % random number generator for now so can compare plots more easily
 %  rng(20)
+%  rng(10) % used for Figure 18 
+
 %% Runs 'Sim' simulations of ABM for panic-buying model with recruitment, defection and lemming effect
 % M0r = initial density of panic-buyers
 % M0b = initial density of bystanders
@@ -16,7 +18,7 @@ tic;
 % PanicShop = poisson mean products panic-buyers take
 % NormalShop = "" bystanders take
 % ProdPoisRate = poisson mean products on shelves
-% PanicW = weighting of panic-buyers vs products
+% PanicW = `W' in report, weighting of panic-buyers vs products. 
 %% Setup and Initial Conditions
 
 X=61; %100 % Number of x-ordinates
@@ -46,7 +48,7 @@ Def=[0 0.2125 0.425 0.6375 0.85];
 % Def=[0 1/20 1/10 3/20 2/10];
 
 Ttot=20;
-Sim=40;
+Sim=1;%40;
 
 M=100*max(max(Def),max(Rec));
 
@@ -135,7 +137,7 @@ end
 for s=1:Sim 
   disp(s)
 
-    % Products
+    % Products structure, P, called '\Pi' in report.
 
     % Singular Value
     % eta = 5;
@@ -532,6 +534,8 @@ for s=1:Sim
     figure(10)
     if supermarket==1
         spy(A(:,1:X),'ks')
+        hold on
+        spy(P(:,1:X),'k')
         hold on
     end
     spy(CR(:,1:X),'r')
